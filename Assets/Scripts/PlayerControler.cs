@@ -9,11 +9,13 @@ public class PlayerControler : MonoBehaviour
     private float jumpPower = 4.5f;
     private float playerSpeed = 5f;
     public GroundSensor groundSensor;
+    private Animator animator;
     // Start is called before the first frame update
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         groundSensor = GetComponentInChildren<GroundSensor>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -25,16 +27,24 @@ public class PlayerControler : MonoBehaviour
         if(inputHorizontal > 0 )
         {
             transform.rotation = Quaternion.Euler(0,0,0);
+            animator.SetBool("IsRunning", true);
         }
-        if(inputHorizontal < 0 )
+        else if(inputHorizontal < 0 )
         {
             transform.rotation = Quaternion.Euler(0,180,0);
+            animator.SetBool("IsRunning", true);
 
+        }
+        else
+        {
+            animator.SetBool("IsRunning", false);
         }
         if(Input.GetButtonDown("Jump") && groundSensor.isGrounded == true)
         {
             Jump();
+            
         }    
+        animator.SetBool("IsJumping", !groundSensor.isGrounded);
     }
     void FixedUpdate()
     {
