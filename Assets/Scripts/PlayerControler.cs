@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerControler : MonoBehaviour
 {
@@ -15,12 +17,35 @@ public class PlayerControler : MonoBehaviour
     [SerializeField] private float _dashCooldwon = 1;
     private bool _canDash = true;
     private bool _isDashing = false; 
+    private GameManager _gameManager;
+    private SoundManager _soundManager;
+    private BoxCollider2D boxCollider;
+    private AudioSource _audioSource;
+    //disparo
+    public Transform bulletSpawn;
+    public GameObject bulletPrefab;
+    public AudioClip shootSFX;
+    public AudioClip deathSFX;
+    public AudioClip jumpSFX;
+    //Dispara si o no?
+    public bool canShoot = false;
+    //timerpowerup
+    public float powerUpDuration = 10;
+    public float powerUpTimer;
+    public Image powerUpImage;
+
+
+
     // Start is called before the first frame update
     void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         groundSensor = GetComponentInChildren<GroundSensor>();
         animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
+        _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
 
     }
 
@@ -60,6 +85,12 @@ public class PlayerControler : MonoBehaviour
             StartCoroutine(Dash());
 
         }
+
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+
     }
     void FixedUpdate()
     {
@@ -83,6 +114,30 @@ public class PlayerControler : MonoBehaviour
          rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
     }
 
+    public void Death()
+    {
+        animator.SetTrigger("IsDead");
+        _audioSource.PlayOneShot(deathSFX);
+        boxCollider.enabled = false;
+        Destroy(groundSensor.gameObject);
+        inputHorizontal = 0;
+        rigidbody.velocity = Vector2.zero;
+        rigidbody.AddForce(Vector2.up * jumpPower / 1.5f, ForceMode2D.Impulse);
+
+        StartCoroutine(_soundManager.DeathBGM());//opcion 2: _soundManager.StartCoroutine("DeathBGM"); 
+
+        //_soundManager.Invoke("DeathBGM", deathSFX.length); //el invoke te permite llamar a una funcion pero meterle un tiempo de cooldown sabes
+        //_soundManager.DeathBGM();
+
+            _gameManager.isPlaying = false;
+
+        Destroy(gameObject, 3);
+
+       
+
+
+    }
+
     IEnumerator Dash()
     {
         float gravity = rigidbody.gravityScale; 
@@ -98,6 +153,12 @@ public class PlayerControler : MonoBehaviour
         _canDash = true;
 
     }
+    void Shoot()
+    {
+        Instantiate(bulletPrefab, bulletSpawn.position, bulletSpawn.rotation);
+        _audioSource.PlayOneShot(shootSFX);
+    }
+    
 
 
 }
