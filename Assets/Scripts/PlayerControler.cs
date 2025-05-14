@@ -27,6 +27,7 @@ public class PlayerControler : MonoBehaviour
     public AudioClip shootSFX;
     public AudioClip deathSFX;
     public AudioClip jumpSFX;
+    public AudioClip dashSFX;
     //Dispara si o no?
     public bool canShoot = false;
     //timerpowerup
@@ -112,6 +113,7 @@ public class PlayerControler : MonoBehaviour
             rigidbody.velocity = new Vector2(rigidbody.velocity.x,0);
         }
          rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+          _audioSource.PlayOneShot(jumpSFX);
     }
 
     public void Death()
@@ -146,6 +148,7 @@ public class PlayerControler : MonoBehaviour
         _isDashing = true;
         _canDash = false; 
         rigidbody.AddForce(transform.right * _dashForce, ForceMode2D.Impulse); 
+        _audioSource.PlayOneShot(dashSFX);
         yield return new WaitForSeconds(_dashDuration);
         rigidbody.gravityScale = gravity;
         _isDashing = false;

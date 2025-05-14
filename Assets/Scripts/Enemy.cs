@@ -27,6 +27,7 @@ public class Enemy : MonoBehaviour
         rigidbody = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
+        _animator = GetComponent<Animator>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
     }
@@ -52,12 +53,13 @@ public class Enemy : MonoBehaviour
     public void Death()
     {
         //gameManager.Kills();
+        boxCollider.enabled = false;
         _audioSource.PlayOneShot(enemyDeathSFX);
         direction = 0;
         rigidbody.gravityScale = 0;
         _animator.SetTrigger("IsDead");
-        boxCollider.enabled = false;
-        Destroy(gameObject, 0.3f);
+        
+        Destroy(gameObject, 0.5f);
     }
      public void TakeDamage(float damage)
     {
