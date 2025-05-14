@@ -147,6 +147,7 @@ public class PlayerControler : MonoBehaviour
         float gravity = rigidbody.gravityScale; 
         rigidbody.gravityScale = 0;
         rigidbody.velocity = new Vector2(rigidbody.velocity.x,0);
+        animator.SetTrigger("IsDashing");
         _audioSource.PlayOneShot(dashSFX);
         _isDashing = true;
         _canDash = false; 
