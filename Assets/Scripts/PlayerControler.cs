@@ -111,9 +111,11 @@ public class PlayerControler : MonoBehaviour
         {
             groundSensor.canDoubleJump = false;
             rigidbody.velocity = new Vector2(rigidbody.velocity.x,0);
+           
         }
          rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
           _audioSource.PlayOneShot(jumpSFX);
+          
     }
 
     public void Death()
@@ -145,10 +147,10 @@ public class PlayerControler : MonoBehaviour
         float gravity = rigidbody.gravityScale; 
         rigidbody.gravityScale = 0;
         rigidbody.velocity = new Vector2(rigidbody.velocity.x,0);
+        _audioSource.PlayOneShot(dashSFX);
         _isDashing = true;
         _canDash = false; 
         rigidbody.AddForce(transform.right * _dashForce, ForceMode2D.Impulse); 
-        _audioSource.PlayOneShot(dashSFX);
         yield return new WaitForSeconds(_dashDuration);
         rigidbody.gravityScale = gravity;
         _isDashing = false;
