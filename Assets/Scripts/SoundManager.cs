@@ -66,7 +66,7 @@ public class SoundManager : MonoBehaviour
 
         yield return new WaitForSeconds(delay);
 
-        SceneManager.LoadScene(2);
+        
     }
     public void Win()
     {
