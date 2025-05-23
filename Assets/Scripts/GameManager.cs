@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
+        pauseCanvas.SetActive(false);
         coinsText.text = "  Coins : " + coins.ToString();
         killsText.text = "Kills: " + kills.ToString();
     }

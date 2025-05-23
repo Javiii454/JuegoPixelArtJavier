@@ -159,9 +159,9 @@ public class PlayerControler : MonoBehaviour
         //_soundManager.Invoke("DeathBGM", deathSFX.length); //el invoke te permite llamar a una funcion pero meterle un tiempo de cooldown sabes
         //_soundManager.DeathBGM();
 
-            _gameManager.isPlaying = false;
+        _gameManager.isPlaying = false;
 
-        Destroy(gameObject, 3);
+        Destroy(gameObject, 5);
 
         StartCoroutine(GameOver());
        
@@ -169,12 +169,12 @@ public class PlayerControler : MonoBehaviour
 
     }
 
-    float gameOverDelay = 2;
+    float gameOverDelay = 4;
 
     IEnumerator GameOver()
     {
         yield return new WaitForSeconds(gameOverDelay);
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(2);
 
     }
 

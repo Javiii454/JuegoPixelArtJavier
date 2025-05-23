@@ -13,12 +13,12 @@ public GameObject victoriaCanvas;
 
  void OnTriggerEnter2D(Collider2D collider)
  {
-    if(collider.gameObject.CompareTag("Player"))
-    {
-    victoriaCanvas.SetActive(true);
-    //StartCoroutine(FinishLevel());
+   if(collider.gameObject.CompareTag("Player"))
+   {
+   victoriaCanvas.SetActive(true);
+   //StartCoroutine(FinishLevel());
     
-    }
+   }
     
  }
  
