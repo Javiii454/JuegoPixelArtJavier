@@ -128,4 +128,16 @@ public class Enemy : MonoBehaviour
             direction *= -1;
         }
     }
+
+    void OnBecameVisible()
+    {
+        direction = 1;
+        gameManager.enemiesInScreen.Add(gameObject);
+    }
+
+    void OnBecameInvisible()
+    {
+        direction = 0;
+        gameManager.enemiesInScreen.Remove(gameObject);
+    }
 }

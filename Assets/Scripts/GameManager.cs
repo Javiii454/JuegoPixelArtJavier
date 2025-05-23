@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     private int kills = 0;
     public Text killsText;    
     public AudioSource _audioSource;
-    public AudioClip nPressedSFX;
+    
+ 
     
 
     public List<GameObject> enemiesInScreen; 
@@ -29,8 +30,8 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-       // coinsText.text = "  Coins : " + coins.ToString();
-        //killsText.text = "Kills: " + kills.ToString();
+        coinsText.text = "  Coins : " + coins.ToString();
+        killsText.text = "Kills: " + kills.ToString();
     }
     void Update()
     {
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
                Enemy enemyScript = enemy.GetComponent<Enemy>();
                enemyScript.Death();
             }
-            _audioSource.PlayOneShot(nPressedSFX);
+           
         }
     }
     public void MainMenu()
@@ -62,14 +63,14 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
             isPaused = false;
             _soundManager.PauseBGM();
-            //pauseCanvas.SetActive(false);
+            pauseCanvas.SetActive(false);
         }
         else
         {
             Time.timeScale = 0;
             isPaused = true;
             _soundManager.PauseBGM();
-            //pauseCanvas.SetActive(true);
+            pauseCanvas.SetActive(true);
         }
       
     }
@@ -83,6 +84,7 @@ public class GameManager : MonoBehaviour
         kills++;
         killsText.text = "Kills: " + kills.ToString();
     }
+
 
 
 }

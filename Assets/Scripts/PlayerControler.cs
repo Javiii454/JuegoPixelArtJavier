@@ -163,8 +163,18 @@ public class PlayerControler : MonoBehaviour
 
         Destroy(gameObject, 3);
 
+        StartCoroutine(GameOver());
        
 
+
+    }
+
+    float gameOverDelay = 2;
+
+    IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(gameOverDelay);
+        SceneManager.LoadScene(1);
 
     }
 
