@@ -9,9 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Nivel2.unity
+    path: Assets/Scenes/GameOver.unity
     guid: 2c0c2a58039b0c34cb428600004fe67d
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NivelSecreto.unity
     guid: e9cc0d542f9f07a4f94bcba24e5c733a
   m_configObjects: {}

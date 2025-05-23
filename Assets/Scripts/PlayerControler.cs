@@ -34,6 +34,11 @@ public class PlayerControler : MonoBehaviour
     public float powerUpDuration = 10;
     public float powerUpTimer;
     public Image powerUpImage;
+    // vida
+    private Slider healthBar;
+    public float maxHealth = 50;         
+    public float currentHealth;
+
 
 
 
@@ -45,9 +50,17 @@ public class PlayerControler : MonoBehaviour
         animator = GetComponent<Animator>();
         _audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
+        healthBar = GetComponentInChildren<Slider>();
         _gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         _soundManager = FindObjectOfType<SoundManager>().GetComponent<SoundManager>();
 
+    }
+
+    void Start()
+    {
+        currentHealth = maxHealth;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = maxHealth;
     }
 
     // Update is called once per frame
@@ -116,6 +129,19 @@ public class PlayerControler : MonoBehaviour
          rigidbody.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
           _audioSource.PlayOneShot(jumpSFX);
           
+    }
+
+    public void TakeDamage(float damage)
+    {
+        currentHealth-= (int) damage;
+        healthBar.value = currentHealth;
+       
+        
+
+        if(currentHealth <=0)
+        {
+            Death();
+        }
     }
 
     public void Death()

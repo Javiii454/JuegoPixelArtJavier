@@ -8,11 +8,12 @@ public class PoweupInteraction : MonoBehaviour
     private BoxCollider2D boxCollider;
     public AudioClip SFX;
     private SpriteRenderer spriteRenderer;
-
+    private GameManager gameManager;
 
     // Start is called before the first frame update
     void Awake()
     {
+        gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
         audioSource = GetComponent<AudioSource>();
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -35,6 +36,7 @@ public class PoweupInteraction : MonoBehaviour
     {
         if(collider.gameObject.CompareTag("Player"))
         {
+            gameManager.AddCoins();
             audioSource.PlayOneShot(SFX);
             spriteRenderer.enabled = false;
             Destroy(gameObject, 0.3f);

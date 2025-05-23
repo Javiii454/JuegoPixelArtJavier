@@ -21,6 +21,7 @@ public class Enemy : MonoBehaviour
     public float currentHealth;
     private Slider healthBar;
     private GameManager gameManager;
+    public float enemyDamage = 5;
 
     void Awake()
     {
@@ -28,15 +29,16 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         _audioSource = GetComponent<AudioSource>();
         _animator = GetComponent<Animator>();
+        healthBar = GetComponentInChildren<Slider>();
         gameManager = GameObject.Find("Game Manager").GetComponent<GameManager>();
 
     }
     // Start is called before the first frame update
     void Start()
     {
-       currentHealth = maxHealth;
-        //healthBar.maxValue = maxHealth;
-        //healthBar.value = maxHealth;
+        currentHealth = maxHealth;
+        healthBar.maxValue = maxHealth;
+        healthBar.value = maxHealth;
     }
 
     void FixedUpdate()
@@ -52,7 +54,7 @@ public class Enemy : MonoBehaviour
     
     public void Death()
     {
-        //gameManager.Kills();
+        gameManager.Kills();
         boxCollider.enabled = false;
         _audioSource.PlayOneShot(enemyDeathSFX);
         direction = 0;
@@ -65,7 +67,7 @@ public class Enemy : MonoBehaviour
     {
         _audioSource.PlayOneShot(hitSFX);
         currentHealth-= (int) damage;
-        //healthBar.value = currentHealth;
+        healthBar.value = currentHealth;
         
 
         if(currentHealth <=0)
@@ -80,14 +82,45 @@ public class Enemy : MonoBehaviour
         {
             //Destroy(collision.gameObject);
             PlayerControler playerScript = collision.gameObject.GetComponent<PlayerControler>(); //variable que accede al playercontrol(script para ejecturar la funcion death que esta alli)
-            playerScript.Death();
+            playerScript.TakeDamage(enemyDamage);
+            
 
         }
+
+          
+
         if(collision.gameObject.CompareTag("Limite") || collision.gameObject.layer == 6)
         {
             direction *= -1;
         }
     }
+
+    void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            //Destroy(collision.gameObject);
+            PlayerControler playerScript = collision.gameObject.GetComponent<PlayerControler>(); //variable que accede al playercontrol(script para ejecturar la funcion death que esta alli)
+            if(canAttack)
+            {
+                StartCoroutine(AttackDelay());
+                playerScript.TakeDamage(enemyDamage);
+            }
+
+        }
+    }
+
+    bool canAttack = true;
+    float attackDelay = 1;
+
+    IEnumerator AttackDelay()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackDelay);
+        canAttack = true;
+    }
+
+
     void OnTriggerEnter2D(Collider2D collider)
     {
         if(collider.gameObject.CompareTag("Limite") || collider.gameObject.layer == 6)

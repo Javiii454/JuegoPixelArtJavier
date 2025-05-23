@@ -20,9 +20,17 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9622642
       objectReference: {fileID: 0}
+    - target: {fileID: 3733092058253850697, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
+      propertyPath: m_FillAmount
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4185473234374646772, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
       propertyPath: m_Name
       value: enemigo pixel art (3) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 4185473234374646772, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5213616481141922464, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
       propertyPath: m_LocalScale.x
@@ -38,15 +46,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5213616481141922464, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 28.43
+      value: 29.932
       objectReference: {fileID: 0}
     - target: {fileID: 5213616481141922464, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.57
+      value: -5.248
       objectReference: {fileID: 0}
     - target: {fileID: 5213616481141922464, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.025198905
+      value: 0.05039781
       objectReference: {fileID: 0}
     - target: {fileID: 5213616481141922464, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
       propertyPath: m_LocalRotation.w
@@ -75,6 +83,22 @@ PrefabInstance:
     - target: {fileID: 5213616481141922464, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421203631571053351, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
+      propertyPath: m_Size.x
+      value: 0.48543105
+      objectReference: {fileID: 0}
+    - target: {fileID: 5421203631571053351, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
+      propertyPath: m_Offset.x
+      value: 0.0077206343
+      objectReference: {fileID: 0}
+    - target: {fileID: 5694527310502514122, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
+      propertyPath: m_Value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6971227657855785018, guid: a56c7bd35ceeec14ebc745769bef0112, type: 3}
+      propertyPath: enemyDamage
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
